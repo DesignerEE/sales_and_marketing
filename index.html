@@ -1,0 +1,297 @@
+{extends file='_layout.html'}
+
+{block name='content-row'}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default panel-shadow">
+            <div class="panel-heading panel-grey" data-original-title="">
+                <span class="break"></span>
+                <h1>QR on Image generator</h1>
+                <div class="panel-actions">
+                    <a href="#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6">
+
+                    <form id="qr_form" action="#" method="post" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <label>Image/Video URL</label>
+                            <input type="text" name="url" id="url" class="form-control" style="width: 500px;" />
+                        </div>
+                        <div class="form-group">
+                            <label>or Image/Video File</label>
+                            <input type="file" name="file" class="form-control"  style="width: 250px;"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>QR URL</label>
+                            <input type="text" name="qr_url" id="qr_url" class="form-control"  style="width: 500px;"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-toggle="collapse" data-target="#qr_pos_block" id ="qr_pos_lable">QR position <i class="fa fa-caret-down"></i></label><br>
+                            <div id="qr_pos_block" class="collapse">
+                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:100px;">
+                                    <label><input type="radio" name="qr_pos" value="left_top" >Top-Left</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label><input type="radio" name="qr_pos" value="right_top" >Top-Right</label>
+                                </div>
+                                <br>
+                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:100px;">
+                                    <label><input type="radio" name="qr_pos" value="left_bottom">Bottom-Left</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label><input type="radio" name="qr_pos" value="right_bottom" checked>Bottom-Right</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-toggle="collapse" data-target="#qr_size_block" id="qr_size_lable">QR size <i class="fa fa-caret-down"></i></label><br>
+                            <div id="qr_size_block" class="collapse">
+                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px;">
+                                    <label><input type="radio" name="qr_size" value="qr" checked>Small</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label><input type="radio" name="qr_size" value="qrq" >Medium</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label><input type="radio" name="qr_size" value="qrh">Large</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Text on Video</label>
+                            <input type="text" name="text" id="text" class="form-control"  style="width: 250px;"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-toggle="collapse" data-target="#text_pos_block" id ="text_pos_lable">Text position <i class="fa fa-caret-down"></i></label><br>
+                            <div id="text_pos_block" class="collapse">
+                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:120px;">
+                                    <label><input type="radio" name="text_pos" value="left_top" >Top-Left</label>
+                                </div>
+                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:120px;">
+                                    <label><input type="radio" name="text_pos" value="center_top" >Top-Center</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label><input type="radio" name="text_pos" value="right_top" >Top-Right</label>
+                                </div>
+                                <br>
+                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:120px;">
+                                    <label><input type="radio" name="text_pos" value="left_bottom">Bottom-Left</label>
+                                </div>
+                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:120px;">
+                                    <label><input type="radio" name="text_pos" value="center_bottom" checked>Bottom-Center</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label><input type="radio" name="text_pos" value="right_bottom">Bottom-Right</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-toggle="collapse" data-target="#qr_effect_block" id="qr_effect_lable">Effect on Video <i class="fa fa-caret-down"></i></label><br>
+                            <div id="qr_effect_block" class="collapse">
+                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px;">
+                                    <label><input type="radio" name="qr_effect" value="0" checked>No effects</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label><input type="radio" name="qr_effect" value="1" >Effect 1</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label><input type="radio" name="qr_effect" value="2">Effect 2</label>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="qr_submit" type="submit" name="submit" value="Generate" class="btn btn-info">
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <img alt="" id="qr_result" src=""/>
+                        <br>
+                        <div id="qr_image_result" style="margin: 20px; font-size: 150%; font-weight: bold;"></div>
+                        <br>
+                        <div id="qr_video_result" style="margin: 20px; font-size: 150%; font-weight: bold;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default panel-shadow">
+            <div class="panel-heading panel-grey" data-original-title="">
+                <span class="break"></span>
+                <h1>Payment Link QR generator</h1>
+                <div class="panel-actions">
+                    <a href="#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <a href="#" class="btn btn-primary" id="add_product">Add product</a>
+
+                    <label class="radio">
+                        <input name="check" id="product_shipping" value="1" type="checkbox" class="pull-left" style="margin-left: 10px;" >
+                        <div class="label-text" style="margin-left: 30px;">Shipping included</div>
+                    </label>
+
+                    <div class="panel panel-default panel-shadow product_block">
+                        <div class="panel-heading panel-grey" data-original-title="">
+                            <h1>Product</h1>
+                            <div class="panel-actions">
+                                <a href="#" class="btn-add"><i class="fa fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <label><div class="label-text" style="margin: 0 5px 10px;">Name</div></label>
+                            <input id="product_name_1" value="" type="text" class="form-control inline" style="width: 350px;"><br>
+                            <label><div class="label-text" style="margin: 0 5px 10px;">Price</div></label>
+                            <input id="product_price_1" value="" type="text" class="form-control inline" style="width: 80px;"><br>
+                            <label><div class="label-text" style="margin: 0 5px 10px;">Quantity</div></label>
+                            <input id="product_cnt_1" value="" type="text" class="form-control inline" style="width: 80px;"><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <a href="#" class="btn btn-success" id="create_link">Get payment link</a>
+                    <div id="payment_link" style = "margin: 20px; font-size: 150%; font-weight: bold;"></div>
+                    <div style = "margin: 20px; font-size: 150%; font-weight: bold;">
+                        <img alt="" id="payment_qr" src=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function(){
+
+        $('#add_product').click(function() {
+            var clone=$('.product_block:first').clone();
+            clone.insertAfter('.product_block:last');
+
+            var attr_name='product_name_' + clone.index();
+            var attr_price='product_price_' + clone.index();
+            var attr_cnt='product_cnt_' + clone.index();
+
+            clone.find("input[id^='product_name']").attr( { id: attr_name } );
+            clone.find("input[id^='product_price']").attr( { id: attr_price } );
+            clone.find("input[id^='product_cnt']").attr( { id: attr_cnt } );
+            clone.find("div.panel-actions").remove();
+            clone.find("h1").after("<div class='panel-actions'><a href='#' class='btn-delete'><i class='fa fa-times'></i></a></div>");
+        });
+
+        $('.btn-add').click(function() {
+            $('#add_product').trigger("click");
+        });
+
+        $('#create_link').click(function() {
+            var url = "https://billing.aivestor.com/payments.billing?";
+            url = url + "u=" + '{User::id()}';
+            s = $("#product_shipping").is(":checked");
+            if (!s) {
+                url = url + "&s=0";
+            }
+
+            var p = [];
+            $("input[id^='product_name']").each(function(index) {
+                id = $(this).attr("id");
+                id_data = id.split("_");
+                i = id_data[id_data.length-1];
+                name = encodeURIComponent($(this).val());
+                price = $("#product_price_"+i).val();
+                cnt = $("#product_cnt_"+i).val();
+
+                product = [name, price, cnt].join(":");
+                p.push(product);
+            });
+            url = url + "&p=" + p.join(";");
+
+            $.ajax({
+                url: r('barcode.php', { 's':'qr', 'd': url, 'r': 'base64' } ),
+                type: 'GET',
+                success: function(data) {
+                    var src = "data:image/png;base64," + data;
+                    $("#payment_qr").attr('src', src);
+                }
+            });
+            $("#payment_link").html(url);
+        });
+
+        $("#qr_form").on('submit', function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: r('marketing.generate'),
+                data: new FormData(this),
+                dataType: 'json',
+                contentType: false,
+                cache: false,
+                processData:false,
+                beforeSend:function() {
+                    $('#qr_submit').val("Processing...");
+                },
+                success: function(data){
+
+
+                    $('#qr_submit').val('Generate');
+                    $('#qr_submit').attr("disabled", false);
+
+                    if(data.status == "OK") {
+
+                        notify(data.message, '');
+
+                        $('#qr_result').attr('src', data.result_qr);
+                        $('#qr_image_result').html(data.result_image);
+                        $('#qr_video_result').html(data.result_video);
+
+                    } else {
+                        notify(data.message, '');
+                    }
+                }
+            });
+        });
+
+        $('#qr_size_block').on('shown.bs.collapse', function () {
+            $("#qr_size_lable i").removeClass("fa-caret-down").addClass("fa-caret-up");
+        });
+        $('#qr_size_block').on('hide.bs.collapse', function () {
+            $("#qr_size_lable i").removeClass("fa-caret-up").addClass("fa-caret-down");
+        });
+        $('#qr_pos_block').on('shown.bs.collapse', function () {
+            $("#qr_pos_lable i").removeClass("fa-caret-down").addClass("fa-caret-up");
+        });
+        $('#qr_pos_block').on('hide.bs.collapse', function () {
+            $("#qr_pos_lable i").removeClass("fa-caret-up").addClass("fa-caret-down");
+        });
+        $('#text_pos_block').on('shown.bs.collapse', function () {
+            $("#text_pos_lable i").removeClass("fa-caret-down").addClass("fa-caret-up");
+        });
+        $('#text_pos_block').on('hide.bs.collapse', function () {
+            $("#text_pos_lable i").removeClass("fa-caret-up").addClass("fa-caret-down");
+        });
+        $('#qr_effect_block').on('shown.bs.collapse', function () {
+            $("#qr_effect_lable i").removeClass("fa-caret-down").addClass("fa-caret-up");
+        });
+        $('#qr_effect_block').on('hide.bs.collapse', function () {
+            $("#qr_effect_lable i").removeClass("fa-caret-up").addClass("fa-caret-down");
+        });
+    });
+
+    $(document).on('click', '.btn-delete', function(e) {
+        var block = $(this).parent().parent().parent();
+        block.remove();
+    });
+
+</script>
+
+{/block}
