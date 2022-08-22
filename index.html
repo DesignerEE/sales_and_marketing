@@ -1,24 +1,3 @@
-/****************************************************************************\
-marketing.php - Promotional tools for marketing and sales online. MIT license.
-Copyright (c) 2007-2022 DNP Online.
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-DEALINGS IN THE SOFTWARE.
-\****************************************************************************/
-
 {extends file='_layout.html'}
 
 {block name='content-row'}
@@ -37,22 +16,22 @@ DEALINGS IN THE SOFTWARE.
                 <div class="col-md-6">
 
                     <form id="qr_form" action="#" method="post" enctype="multipart/form-data">
-
-                        <div class="form-group">
-                            <label>Image/Video URL</label>
+                        <label>1. Select the source image file</label>
+                        <div class="form-group" style="margin-left: 50px;">
+                            <label>Source Image URL</label>
                             <input type="text" name="url" id="url" class="form-control" style="width: 500px;" />
                         </div>
-                        <div class="form-group">
-                            <label>or Image/Video File</label>
+                        <div class="form-group" style="margin-left: 50px;">
+                            <label>or Source Image File</label>
                             <input type="file" name="file" class="form-control"  style="width: 250px;"/>
                         </div>
-
-                        <div class="form-group">
+                        <label>2. (optional) Enter the URL or text to encode. Choose position and size of QR code</label>
+                        <div class="form-group" style="margin-left: 50px;">
                             <label>QR URL</label>
                             <input type="text" name="qr_url" id="qr_url" class="form-control"  style="width: 500px;"/>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" style="margin-left: 50px;">
                             <label data-toggle="collapse" data-target="#qr_pos_block" id ="qr_pos_lable">QR position <i class="fa fa-caret-down"></i></label><br>
                             <div id="qr_pos_block" class="collapse">
                                 <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:100px;">
@@ -70,7 +49,7 @@ DEALINGS IN THE SOFTWARE.
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-left: 50px;">
                             <label data-toggle="collapse" data-target="#qr_size_block" id="qr_size_lable">QR size <i class="fa fa-caret-down"></i></label><br>
                             <div id="qr_size_block" class="collapse">
                                 <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px;">
@@ -85,47 +64,35 @@ DEALINGS IN THE SOFTWARE.
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <label>3. (optional) Enter a phrase and choose position on video </label>
+                        <div class="form-group" style="margin-left: 50px;">
                             <label>Text on Video</label>
                             <input type="text" name="text" id="text" class="form-control"  style="width: 250px;"/>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" style="margin-left: 50px;">
                             <label data-toggle="collapse" data-target="#text_pos_block" id ="text_pos_lable">Text position <i class="fa fa-caret-down"></i></label><br>
                             <div id="text_pos_block" class="collapse">
                                 <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:120px;">
-                                    <label><input type="radio" name="text_pos" value="left_top" >Top-Left</label>
+                                    <label><input type="radio" name="text_pos" value="top" >Top</label>
                                 </div>
                                 <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:120px;">
-                                    <label><input type="radio" name="text_pos" value="center_top" >Top-Center</label>
+                                    <label><input type="radio" name="text_pos" value="center" checked>Center</label>
                                 </div>
                                 <div class="radio radio-inline">
-                                    <label><input type="radio" name="text_pos" value="right_top" >Top-Right</label>
-                                </div>
-                                <br>
-                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:120px;">
-                                    <label><input type="radio" name="text_pos" value="left_bottom">Bottom-Left</label>
-                                </div>
-                                <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px; width:120px;">
-                                    <label><input type="radio" name="text_pos" value="center_bottom" checked>Bottom-Center</label>
-                                </div>
-                                <div class="radio radio-inline">
-                                    <label><input type="radio" name="text_pos" value="right_bottom">Bottom-Right</label>
+                                    <label><input type="radio" name="text_pos" value="bottom">Bottom</label>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label data-toggle="collapse" data-target="#qr_effect_block" id="qr_effect_lable">Effect on Video <i class="fa fa-caret-down"></i></label><br>
-                            <div id="qr_effect_block" class="collapse">
+                        <label><b>4.</b>Choose video effect </label>
+                        <div class="form-group" style="margin-left: 50px;">
+                            <label data-toggle="collapse" data-target="#video_effect_block" id="video_effect_lable">Effect on Video <i class="fa fa-caret-down"></i></label><br>
+                            <div id="video_effect_block" class="collapse">
                                 <div class="radio radio-inline" style="margin-top: 0px; padding-left: 0px;">
-                                    <label><input type="radio" name="qr_effect" value="0" checked>No effects</label>
+                                    <label><input type="radio" name="video_effect" value="0" checked>No effects</label>
                                 </div>
                                 <div class="radio radio-inline">
-                                    <label><input type="radio" name="qr_effect" value="1" >Effect 1</label>
-                                </div>
-                                <div class="radio radio-inline">
-                                    <label><input type="radio" name="qr_effect" value="2">Effect 2</label>
+                                    <label><input type="radio" name="video_effect" value="1" >Zoom In</label>
                                 </div>
                             </div>
                         </div>
@@ -300,11 +267,11 @@ DEALINGS IN THE SOFTWARE.
         $('#text_pos_block').on('hide.bs.collapse', function () {
             $("#text_pos_lable i").removeClass("fa-caret-up").addClass("fa-caret-down");
         });
-        $('#qr_effect_block').on('shown.bs.collapse', function () {
-            $("#qr_effect_lable i").removeClass("fa-caret-down").addClass("fa-caret-up");
+        $('#video_effect_block').on('shown.bs.collapse', function () {
+            $("#video_effect_lable i").removeClass("fa-caret-down").addClass("fa-caret-up");
         });
-        $('#qr_effect_block').on('hide.bs.collapse', function () {
-            $("#qr_effect_lable i").removeClass("fa-caret-up").addClass("fa-caret-down");
+        $('#video_effect_block').on('hide.bs.collapse', function () {
+            $("#video_effect_lable i").removeClass("fa-caret-up").addClass("fa-caret-down");
         });
     });
 
